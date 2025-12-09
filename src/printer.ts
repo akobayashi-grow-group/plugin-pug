@@ -1950,13 +1950,9 @@ export class PugPrinter {
       }
 
       default: {
-        const prefix: string = this.result.slice(0, this.possibleIdPosition);
-        this.possibleClassPosition += val.length;
-        this.result = [
-          prefix,
-          val,
-          this.result.slice(this.possibleIdPosition),
-        ].join('');
+        // avoid moving id before classes; append instead
+        this.result += val;
+        this.possibleClassPosition = this.result.length;
         break;
       }
     }
