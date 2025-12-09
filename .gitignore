@@ -64,7 +64,7 @@ typings/
 .next
 
 # build
-dist
+#dist
 
 # docs
 .temp
