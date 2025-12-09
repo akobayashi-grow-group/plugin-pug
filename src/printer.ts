@@ -2186,19 +2186,11 @@ export class PugPrinter {
 
   private async call(token: CallToken): Promise<string> {
     let result: string = `${this.computedIndent}+${token.val}`;
-    let args: string | null = token.args;
-    if (args) {
-      args = args.trim().replaceAll(/\s\s+/g, ' ');
-      // Place an x at the beginning to preserve brackets,
-      // then remove the x after format.
-      args = await format(`x(${args})`, {
-        parser: 'babel',
-        ...this.codeInterpolationOptions,
-        semi: false,
-      });
-      args = args.trim().slice(1);
+    const args: string | null = token.args;
 
-      result += args;
+    if (args) {
+      // JS として再フォーマットせず、元の文字列をそのまま使う
+      result += `(${args})`;
     }
 
     this.currentLineLength += result.length;
